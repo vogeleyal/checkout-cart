@@ -3,10 +3,11 @@ angular.module('cartApp', [
     'ngRoute',
     'tw.directives.fileInput'
   ]).config(['$routeProvider', function($routeProvider) {
-    $routeProvider.when('/cart', {
-      templateUrl: 'cart/cart.view.html'
-    });
 
+    // Definiing routes
+    $routeProvider.when('/cart', {
+      template: '<checkout></checkout>'
+    });
     $routeProvider.when('/print', {
       template: '<print></print>'
     });

@@ -11,7 +11,10 @@ angular.module('cartApp').component('checkout', {
       ctrl.calculateTotalPrice();
     }
 
+    // Functions
     ctrl.calculateTotalPrice = function calculateTotalPrice() {
+
+       // Iterating over items in cart and calculating the total price for the cart
       var totalPrice = 0;
       for (var i = 0; i < ctrl.items.length; i++) {
         var item = ctrl.items[i];
@@ -23,10 +26,14 @@ angular.module('cartApp').component('checkout', {
     };
 
     ctrl.removeItem = function removeItem(item) {
+
+      // Calling service method to remove the item
       cartService.removeCartItem(item);
     };
 
     ctrl.checkout = function checkout() {
+
+      // Calling server to perform checkout and displaying a message upun success
       cartService.checkout(ctrl.items).then(function(result) {
         if (result) {
           alert('Your order has been placed! Thank you!');

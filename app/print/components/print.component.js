@@ -20,23 +20,30 @@ angular.module('cartApp').component('print', {
       };
     }
 
+    // Functions
     ctrl.addPrintOrderToCart = function addPrintOrderToCart() {
-      // Validate some more
+      // Probably validate item before adding it to the cart
 
+      // Finish initializing the item to add
       ctrl.print.title = ctrl.print.file.name;
       pricingService.calcualtePrintPrice(print).then(function(unitPrice) {
         ctrl.print.price = unitPrice;
+
+        // Adding the item to the cart and navigating to it
         cartService.addCartItem(ctrl.print);
         $location.path('#!/cart');
       });
     };
 
     // Watchers
-    $scope.$watch(function() { return ctrl.print.file; }, function (newVal, oldVal) {
+    $scope.$watch(function() { return ctrl.print.file; }, function (newVal) {
+      // Watch for changes to the file input
       if (newVal !== null) {
 
+        // Validating the 3d model in the server
         printService.validateModel(ctrl.print.file).then(function(result) {
           if (result) {
+            // Model is valid and we allow selection of materials
             return printService.getAvailableMaterials().then(function (materials) {
               ctrl.isValidModel = true;
               ctrl.availableMaterials = materials;
@@ -49,8 +56,10 @@ angular.module('cartApp').component('print', {
     });
 
     $scope.$watch(function() { return ctrl.print.material; }, function (newVal, oldVal) {
+      // Watching selection of material
       if (newVal !== null) {
 
+        // Getting the availalble colors for selection from server (probably depending on material)
         printService.getAvailableColors().then(function(colors) {
           ctrl.availableColors = colors;
         });
