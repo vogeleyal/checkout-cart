@@ -1,0 +1,53 @@
+<div class="container">
+  <h3>New Print Order</h3>
+  <form class="well form-horizontal">
+    <fieldset>
+      <div class="form-group">
+        <span class="col-md-4 control-label">3D Model</span>
+        <div class="col-md-4">
+          <div class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-file"></i></span>
+            <input name="model" ng-model="$ctrl.print.file" class="form-control" type="file">
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <span class="col-md-4 control-label">Material</span>
+        <div class="col-md-4">
+          <div class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-leaf"></i></span>
+            <select ng-disabled="!$ctrl.isValidModel" name="material" class="form-control"
+              ng-options="m as m for m in $ctrl.availableMaterials" ng-model="$ctrl.print.material" >
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <span class="col-md-4 control-label">Color</span>
+          <div class="col-md-4">
+            <div class="input-group">
+              <span class="input-group-addon"><i class="glyphicon glyphicon-tint"></i></span>
+              <select ng-disabled="!$ctrl.print.material" name="color" class="form-control"
+                ng-options="c as c for c in $ctrl.availableColors" ng-model="$ctrl.print.color" >
+              </select>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <span class="col-md-4 control-label">Quantity</span>
+          <div class="col-md-4">
+            <div class="input-group">
+              <span class="input-group-addon"><i class="glyphicon glyphicon-list"></i></span>
+              <input name="quantity" ng-model="$ctrl.print.quantity" class="form-control" type="number" min="1" max="10000">
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-4 control-label"></label>
+        <div class="col-md-4">
+          <button class="btn btn-primary pull-right" ng-click="$ctrl.addPrintOrderToCart()">Add new print <span class="glyphicon glyphicon"></span></button>
+        </div>
+      </div>
+    </fieldset>
+  </form>
+</div>

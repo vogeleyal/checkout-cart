@@ -1,0 +1,75 @@
+<div class="container">
+  <h3>Your Cart</h3>
+  <div class="well" ng-if="$ctrl.items.length == 0">
+    <div>
+      <h4><strong>WHOOPS!</strong></h4>
+      <h5>It seems like your cart is empty...</h5>
+
+      <a href="#!/print">
+        <button type="button" class="btn btn-default">
+          Add another print
+        </button>
+      </a>
+    </div>
+  </div>
+  <div ng-if="$ctrl.items.length > 0">
+    <table class="table table-hover well checkout-list">
+      <thead>
+        <tr>
+          <th>Prints</th>
+          <th class="text-center">Price</th>
+          <th>Quantity</th>
+          <th class="text-center">Total</th>
+          <th> </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-repeat="item in $ctrl.items">
+          <td class="col-sm-8 col-md-6 ">
+            <div class="media">
+              <div class="media-body">
+                <h4 class="media-heading">{{item.title}}</h4>
+                <h5 class="media-heading">{{item.material}} colored in {{item.color}}</h5>
+              </div>
+            </div>
+         </td>
+          <td class="col-sm-1 col-md-1 text-center">
+            <strong>{{item.price}}</strong>
+          </td>
+          <td class="col-sm-1 col-md-1" style="text-align: center">
+            <input type="number" class="form-control" ng-model="item.quantity" min="1" max="1000">
+          </td>
+          <td class="col-sm-1 col-md-1 text-center">
+            <strong>{{item.price * item.quantity}}</strong>
+          </td>
+          <td class="col-sm-1 col-md-1">
+            <button title="Remove item" type="button" class="btn btn-danger"
+              ng-click="$ctrl.removeItem(item)">
+              <span class="glyphicon glyphicon-trash"></span>
+            </button>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="3"></td>
+          <td><h3>Total</h3></td>
+          <td class="text-right"><h3><strong>{{::$ctrl.calculateTotalPrice()}}</strong></h3></td>
+        </tr>
+        <tr>
+          <td colspan="3"></td>
+          <td>
+            <a href="#!/print">
+              <button type="button" class="btn btn-default">
+                Add another print
+              </button>
+            </a>
+          </td>
+          <td>
+            <button type="button" class="btn btn-primary" ng-click="$ctrl.checkout()">
+              Checkout <span class="glyphicon glyphicon-play"></span>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
